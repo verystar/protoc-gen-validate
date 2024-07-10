@@ -1,7 +1,7 @@
 syntax = "proto2";
 package validate;
 
-option go_package = "github.com/envoyproxy/protoc-gen-validate/validate";
+option go_package = "github.com/verystar/protoc-gen-validate/validate";
 option java_package = "io.envoyproxy.pgv.validate";
 
 import "google/protobuf/descriptor.proto";
@@ -562,6 +562,9 @@ message StringRules {
     // NotIn specifies that this field cannot be equal to one of the specified
     // values
     repeated string not_in = 11;
+
+    // NoSpace specifies that the field not contains space before or after
+    optional bool no_space = 27;
 
     // WellKnown rules provide advanced constraints against common string
     // patterns

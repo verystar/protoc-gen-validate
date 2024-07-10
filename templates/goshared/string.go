@@ -113,6 +113,14 @@ const strTpl = `
 		}
 	{{ end }}
 
+	{{ if $r.GetNoSpace }}
+		if strings.TrimSpace({{ accessor . }}) != {{ accessor . }} {
+			err := {{ err . "value contains space before or after" }}
+			if !all { return err }
+			errors = append(errors, err)
+		}
+	{{ end }}
+
 	{{ if $r.GetIp }}
 		if ip := net.ParseIP({{ accessor . }}); ip == nil {
 			err := {{ err . "value must be a valid IP address" }}

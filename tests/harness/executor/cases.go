@@ -4,10 +4,10 @@ import (
 	"math"
 	"time"
 
-	cases "github.com/envoyproxy/protoc-gen-validate/tests/harness/cases/go"
-	other_package "github.com/envoyproxy/protoc-gen-validate/tests/harness/cases/other_package/go"
-	sort "github.com/envoyproxy/protoc-gen-validate/tests/harness/cases/sort/go"
-	yet_another_package "github.com/envoyproxy/protoc-gen-validate/tests/harness/cases/yet_another_package/go"
+	cases "github.com/verystar/protoc-gen-validate/tests/harness/cases/go"
+	other_package "github.com/verystar/protoc-gen-validate/tests/harness/cases/other_package/go"
+	sort "github.com/verystar/protoc-gen-validate/tests/harness/cases/sort/go"
+	yet_another_package "github.com/verystar/protoc-gen-validate/tests/harness/cases/yet_another_package/go"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/durationpb"
@@ -927,6 +927,9 @@ var stringCases = []TestCase{
 	{"string - non-strict valid header - invalid (NUL)", &cases.StringValidHeader{Val: "foo\u0000bar"}, 1},
 	{"string - non-strict valid header - invalid (CR)", &cases.StringValidHeader{Val: "example\r"}, 1},
 	{"string - non-strict valid header - invalid (NL)", &cases.StringValidHeader{Val: "exa\u000Ample"}, 1},
+	{"string - nospace - invalid (spaces)", &cases.StringNoSpace{Val: "exapmle "}, 1},
+	{"string - nospace - invalid (CR)", &cases.StringNoSpace{Val: "exapmle\r"}, 1},
+	{"string - nospace - invalid (N)", &cases.StringNoSpace{Val: "exapmle\n"}, 1},
 }
 
 var bytesCases = []TestCase{
@@ -1182,7 +1185,7 @@ var mapCases = []TestCase{
 	{"map - no sparse - valid", &cases.MapNoSparse{Val: map[uint32]*cases.MapNoSparse_Msg{1: {}, 2: {}}}, 0},
 	{"map - no sparse - valid (empty)", &cases.MapNoSparse{Val: map[uint32]*cases.MapNoSparse_Msg{}}, 0},
 	// sparse maps are no longer supported, so this case is no longer possible
-	//{"map - no sparse - invalid", &cases.MapNoSparse{Val: map[uint32]*cases.MapNoSparse_Msg{1: {}, 2: nil}}, 1},
+	// {"map - no sparse - invalid", &cases.MapNoSparse{Val: map[uint32]*cases.MapNoSparse_Msg{1: {}, 2: nil}}, 1},
 
 	{"map - keys - valid", &cases.MapKeys{Val: map[int64]string{-1: "a", -2: "b"}}, 0},
 	{"map - keys - valid (empty)", &cases.MapKeys{Val: map[int64]string{}}, 0},

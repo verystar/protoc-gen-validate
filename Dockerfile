@@ -18,7 +18,7 @@ ENV INSTALL_DEPS \
   apt-transport-https \
   curl \
   openjdk-8-jdk \
-  gnupg 
+  gnupg
 
 RUN apt update \
   && apt install -y -q --no-install-recommends ${INSTALL_DEPS} \
@@ -65,7 +65,7 @@ RUN go install github.com/bazelbuild/buildtools/buildozer@${BDR_VER} \
 # the distribution we installed doesn't provide this alias
 RUN ln -s /usr/bin/python3.8 /usr/bin/python
 
-WORKDIR ${GOPATH}/src/github.com/envoyproxy/protoc-gen-validate
+WORKDIR ${GOPATH}/src/github.com/verystar/protoc-gen-validate
 
 # python tooling for linting and uploading to PyPI
 COPY requirements.txt .
